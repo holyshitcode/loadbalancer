@@ -7,29 +7,18 @@
  * judge can balance
  * depend on its task_count
  */
-static bool can_balance(int amount) {
-    if(amount == 0 || amount < CAN_BALANCE) {
-        return true;
-    }
-    return false;
+static bool can_balance(int amount, int highest) {
+    return amount < highest * 0.55;
 }
 
 /*
  * find busiest processor and return
  */
-static struct Processor *get_busiest_processor(struct Processor **proc_list, struct Processor *self){
+static struct Processor *get_busiest_processor(struct Processor **proc_list, struct Processor *self, int highest){
     struct Processor *pos;
-    int highest = 0;
-    for_each(pos,*proc_list) {
-        if(pos->task_count > highest) {
-            highest = pos->task_count;
-        }
-    }
-    for_each(pos,*proc_list) {
-        if(!can_balance(pos->task_count)) {
-            if(pos != self && pos->task_count >=  highest) {
-                return pos;
-            }
+    for_each(pos, *proc_list) {
+        if (pos != self && pos->task_count == highest) {
+            return pos;
         }
     }
     return NULL;
@@ -40,11 +29,18 @@ static struct Processor *get_busiest_processor(struct Processor **proc_list, str
  */
 int balance(struct Processor **proc_list) {
         struct Processor *pos;
+        int highest = 0;
         for_each(pos,*proc_list) {
-            if(!can_balance(pos->task_count)) {
+            if(pos->task_count > highest) {
+                highest = pos->task_count;
+            }
+        }
+
+        for_each(pos,*proc_list) {
+            if(!can_balance(pos->task_count,highest)) {
                 continue;
             }
-            struct Processor *balance_target_processor = get_busiest_processor(proc_list,pos);
+            struct Processor *balance_target_processor = get_busiest_processor(proc_list,pos,highest);
             if(balance_target_processor ==NULL) {
                 return -1;
             }
@@ -53,7 +49,7 @@ int balance(struct Processor **proc_list) {
                 return -1;
             }
 
-            for(register int i = 0; i < balance_target_processor->task_count/2; i++ ) {
+            for(register int i = 0; i < balance_target_processor->task_count*0.25; i++ ) {
                 insert_task_to_processor(pos,from_processor_task);
                 balance_target_processor->task_count--;
             }

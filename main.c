@@ -22,7 +22,7 @@ int main() {
     }
 
     struct Processor *pos;
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 80; ++i) {
         for_each(pos,proc_list) {
             if(pos->processor_id < 5) {
                 insert_task_to_processor(pos, task_list);
@@ -30,9 +30,9 @@ int main() {
         }
     }
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 40; ++i) {
         for_each(pos,proc_list) {
-            if(pos->task_count < 4) {
+            if(pos->processor_id >= 5) {
                 insert_task_to_processor(pos, task_list);
             }
         }
@@ -46,6 +46,8 @@ int main() {
 
     balance(&proc_list);
     balance(&proc_list);
+    balance(&proc_list);
+    balance(&proc_list);
 
 
     printf("\nAfter balancing1:\n");
@@ -55,7 +57,8 @@ int main() {
 
     balance(&proc_list);
     balance(&proc_list);
-
+    balance(&proc_list);
+    balance(&proc_list);
 
     printf("\nAfter balancing2:\n");
     for_each(p, proc_list) {

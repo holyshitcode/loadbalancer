@@ -4,7 +4,7 @@
 #include "processor.h"
 #include "task.h"
 
-#define CAN_BALANCE 4
+#define CAN_BALANCE 30
 
 int balance(struct Processor **proc_list);
 
