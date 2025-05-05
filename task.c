@@ -3,10 +3,10 @@
 #include <stdlib.h>
 
 #define RUNNING_TIME rand() % 10 + 1
+
 /*
  *  create new Task
  *  and set running time randomly
- *
  */
 struct Task * create_task() {
     struct Task *new_task = malloc(sizeof(struct Task));
@@ -36,6 +36,10 @@ int insert_task(struct Task **task_list) {
     return 0;
 }
 
+/*
+ *  rid target task from the list
+ *  and return
+ */
 struct Task *get_task(struct Task **task_list) {
     if(*task_list == NULL) {
         return NULL;

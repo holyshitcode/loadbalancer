@@ -67,6 +67,12 @@ build CMakeFiles/loadbalancer.dir/task.c.o: C_COMPILER__loadbalancer_unscanned_D
   OBJECT_DIR = CMakeFiles/loadbalancer.dir
   OBJECT_FILE_DIR = CMakeFiles/loadbalancer.dir
 
+build CMakeFiles/loadbalancer.dir/balance.c.o: C_COMPILER__loadbalancer_unscanned_Debug /Users/junyeong/maindir/loadbalancer/balance.c || cmake_object_order_depends_target_loadbalancer
+  DEP_FILE = CMakeFiles/loadbalancer.dir/balance.c.o.d
+  FLAGS = -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/loadbalancer.dir
+  OBJECT_FILE_DIR = CMakeFiles/loadbalancer.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target loadbalancer
@@ -75,7 +81,7 @@ build CMakeFiles/loadbalancer.dir/task.c.o: C_COMPILER__loadbalancer_unscanned_D
 #############################################
 # Link the executable loadbalancer
 
-build loadbalancer: C_EXECUTABLE_LINKER__loadbalancer_Debug CMakeFiles/loadbalancer.dir/main.c.o CMakeFiles/loadbalancer.dir/processor.c.o CMakeFiles/loadbalancer.dir/task.c.o
+build loadbalancer: C_EXECUTABLE_LINKER__loadbalancer_Debug CMakeFiles/loadbalancer.dir/main.c.o CMakeFiles/loadbalancer.dir/processor.c.o CMakeFiles/loadbalancer.dir/task.c.o CMakeFiles/loadbalancer.dir/balance.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk
   OBJECT_DIR = CMakeFiles/loadbalancer.dir
   POST_BUILD = :
