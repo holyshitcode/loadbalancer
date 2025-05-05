@@ -4,7 +4,6 @@
 #include "task.h"
 #define for_each(pos, head) for(pos = (head)->next; pos != (head); pos = pos->next)
 
-
 extern int processor_counter;
 
 struct Processor {

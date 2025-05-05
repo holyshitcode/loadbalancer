@@ -41,16 +41,22 @@ int insert_task(struct Task **task_list) {
  *  and return
  */
 struct Task *get_task(struct Task **task_list) {
-    if(*task_list == NULL) {
+    if (*task_list == NULL)
         return NULL;
-    }
-    struct Task *return_task = (*task_list)->next;
 
-    if(return_task->next == return_task) {
+    struct Task *head = *task_list;
+    struct Task *task_to_return;
+
+    if (head->next == head) {
+        task_to_return = head;
         *task_list = NULL;
-        return return_task;
+        return task_to_return;
     }
-    (*task_list)->next = return_task->next;
-    return return_task;
+
+    task_to_return = head->next;
+    head->next = task_to_return->next;
+    task_to_return->next = NULL;
+
+    return task_to_return;
 }
 

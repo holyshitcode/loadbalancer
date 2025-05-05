@@ -31,6 +31,7 @@ int insert_processor_to_list(struct Processor **processor_list) {
     }
     if(*processor_list == NULL) {
         *processor_list = new_processor;
+        new_processor->next = new_processor;
     }else {
         new_processor->next = (*processor_list)->next;
         (*processor_list)->next = new_processor;
@@ -42,12 +43,19 @@ int insert_processor_to_list(struct Processor **processor_list) {
 /*
  *  insert task into processor's task_list
  */
-int insert_task_to_processor(struct Processor *proc, struct Task *task_list) {
-    if(proc == NULL || task_list == NULL) {
+int insert_task_to_processor(struct Processor *proc, struct Task *task) {
+    if (proc == NULL || task == NULL) {
         return -1;
     }
-    struct Task **target_list = &proc->task_list;
-    insert_task(target_list);
+
+    if (proc->task_list == NULL) {
+        proc->task_list = task;
+        task->next = task;
+    } else {
+        task->next = proc->task_list->next;
+        proc->task_list->next = task;
+    }
+
     proc->task_count++;
     return 0;
 }
