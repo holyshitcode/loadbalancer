@@ -4,4 +4,5 @@ project(loadbalancer C)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(loadbalancer main.c
-        processor.c)
+        processor.c
+        task.c)
