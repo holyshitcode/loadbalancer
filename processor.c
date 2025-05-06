@@ -1,6 +1,7 @@
 #include "processor.h"
 
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -48,13 +49,7 @@ int insert_task_to_processor(struct Processor *proc, struct Task *task) {
         return -1;
     }
 
-    if (proc->task_list == NULL) {
-        proc->task_list = task;
-        task->next = task;
-    } else {
-        task->next = proc->task_list->next;
-        proc->task_list->next = task;
-    }
+    insert_task(&proc->task_list);
 
     proc->task_count++;
     return 0;
@@ -65,13 +60,19 @@ int insert_task_to_processor(struct Processor *proc, struct Task *task) {
  * and remove task
  */
 int consume_task_from_processor(struct Processor *proc) {
+    printf("Processor %d consume\n",proc->processor_id);
     struct Task **target_list = &proc->task_list;
     struct Task *remove_task = get_task(target_list);
     if(remove_task == NULL) {
         return -1;
     }
     proc->task_count--;
-    sleep(remove_task->running_time);
-    free(remove_task);
+    int random = rand() % 2 + 1;
+    if(random == 1) {
+        sleep(remove_task->running_time+5);
+    }else {
+        sleep(remove_task->running_time);
+    }
+    // free(remove_task);
     return 0;
 }

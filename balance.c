@@ -2,6 +2,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 
 /*
  * judge can balance
@@ -28,6 +29,7 @@ static struct Processor *get_busiest_processor(struct Processor **proc_list, str
  * balance processors
  */
 int balance(struct Processor **proc_list) {
+        printf("balancer activated!!\n");
         struct Processor *pos;
         int highest = 0;
         for_each(pos,*proc_list) {
@@ -48,7 +50,7 @@ int balance(struct Processor **proc_list) {
             if(from_processor_task == NULL) {
                 return -1;
             }
-
+            printf("%d's task removed for %f",balance_target_processor->processor_id,balance_target_processor->task_count*0.25);
             for(register int i = 0; i < balance_target_processor->task_count*0.25; i++ ) {
                 insert_task_to_processor(pos,from_processor_task);
                 balance_target_processor->task_count--;

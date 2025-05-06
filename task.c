@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define RUNNING_TIME rand() % 10 + 1
+#define RUNNING_TIME 0
 
 /*
  *  create new Task
